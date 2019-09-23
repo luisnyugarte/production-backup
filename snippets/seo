@@ -1,0 +1,70 @@
+<!-- Site SEO -->
+<meta name="keywords" content="{{ site.keywords }}"/>
+<meta name="author" content="{{ site.name }}"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+{% if current_layout_page %}
+<!--Layouts SEO -->
+<title>{{ current_layout_page.title }} - {{ site.name }}</title>
+<meta name="description" content="{{ current_layout_page.excerpt }}"/>
+<meta property="og:title" content="{{ current_layout_page.title }}"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="{{ current_layout_page.url }}"/>
+<meta property="og:image" content="{{ site.logo | asset_url : 'original' }}"/>
+<meta property="og:site_name" content="{{ site.name }}"/>
+<meta property="og:description" content="{{ current_layout_page.excerpt }}"/>
+{% elsif promotion %}
+<!-- Promotion SEO -->
+<title>{{ promotion.title }} - {{ site.name }}</title>
+<meta name="description" content="{{ promotion.excerpt }}"/>
+<meta property="og:title" content="{{ promotion.title }}"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="{{ promotion.url }}"/>
+<meta property="og:image" content="{{ promotion.covers.first | asset_url : 'original' }}"/>
+<meta property="og:site_name" content="{{ site.name }}"/>
+<meta property="og:description" content="{{ promotion.excerpt }}"/>
+{% elsif post or audio or video or file or album %}
+<!-- Media SEO -->
+<title>{{ media.title }} - {{ site.name }}</title>
+<meta name="description" content="{{ media.excerpt }}"/>
+<meta property="og:title" content="{{ media.title }}"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="{{ media.url }}"/>
+<meta property="og:image" content="{{ media.covers.first | asset_url : 'original' }}"/>
+<meta property="og:site_name" content="{{ site.name }}"/>
+<meta property="og:description" content="{{ media.excerpt }}"/>
+{% elsif place %}
+<!-- Place SEO -->
+<title>{{ place.title }} - {{ site.name }}</title>
+<meta name="description" content="{{ place.excerpt }}"/>
+<meta property="og:title" content="{{ place.title }}"/>
+<meta property="og:type" content="place"/>
+<meta property="og:url" content="{{ place.url }}"/>
+<meta property="og:image" content="{{ place.covers.first | asset_url : 'original' }}"/>
+<meta property="og:site_name" content="{{ site.name }}"/>
+<meta property="og:description" content="{{ place.excerpt }}"/>
+<meta property="place:latitude" content="{{ place.latitude }}"/>
+<meta property="place:longitude" content="{{ place.longitude }}"/>
+{% elsif product %}
+<!-- Product SEO -->
+<title>{{ product.title }} - {{ site.name }}</title>
+<meta name="description" content="{{ product.excerpt }}"/>
+<meta property="og:title" content="{{ product.title }}"/>
+<meta property="og:type" content="product"/>
+<meta property="og:url" content="{{ product.url }}"/>
+<meta property="og:image" content="{{ product.images.first | asset_url : 'original' }}"/>
+<meta property="og:site_name" content="{{ site.name }}"/>
+<meta property="og:description" content="{{ product.excerpt }}"/>
+<meta property="product:price:amount" content="{{ product.price }}"/>
+<meta property="product:price:currency" content="CLP"/>
+{% else %}
+<!-- Default SEO -->
+<title>{{ site.name }}</title>
+<meta name="description" content="{{ site.description }}"/>
+<meta property="og:title" content="{{ site.name }}"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="{{ request.url }}"/>
+<meta property="og:image" content="{{ site.logo | asset_url : 'original' }}"/>
+<meta property="og:site_name" content="{{ site.name }}"/>
+<meta property="og:description" content="{{ site.description }}"/>
+{% endif %}
+<!-- END SEO -->

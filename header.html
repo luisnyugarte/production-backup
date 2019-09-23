@@ -1,0 +1,70 @@
+<header role="banner" id="header_banner" data-app="true">
+	<div class="header-inner container-fluid">
+			<div class="logo">
+				{% if site.logo %}
+				{{ site.logo | asset_url : 'R360x50' | image_tag }}
+				{% else %}
+				<img src="https://sbs.modyocdn.com/uploads/1ad8ec88-30b8-48ac-98fc-5ed436024147/original/logo-sbs.svg" alt="Logo SBS intermediarios">
+				{% endif %}
+				<h1 class="sr-only">{{ site.name }}</h1>
+			</div>
+			<div class="btn-brokers">ESCRITORIO VIRTUAL</div>
+			<div class="search-brokers mr-4">
+				<label class="typo__label">Nombre intermediario</label>
+				<!--Nombre agente temporal primera salida productiva-->
+				<div class="broker-name" :title="agentName">${agentName}</div>
+				<!--dropdown de listado de agentes-->
+				<!-- <multiselect 
+				 		v-model="brokerNameLogin" 
+						:options="printData"
+						track-by="brokerData"
+						label="brokerData"
+						:show-labels="false"
+						:allow-empty="false"
+						placeholder="Buscar"
+				 		>					 
+				 		</multiselect> -->
+			</div>
+			<div v-if="agentStatus">
+				<div class="broker-status">${agentStatus}</div>
+			</div>
+			<nav class="navbar navbar-expand-md m-0" role="navigation">
+				<h2 class="sr-only">Menu</h2>
+				<button class="btn btn-outline-light ml-auto d-block d-sm-none" type="button" data-toggle="collapse" data-target="#navbar-menu"
+								aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+					<svg style="width:18px;height:18px" viewBox="0 0 24 24">
+						<path fill="#FFFFFF" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+					</svg>
+				</button>
+				
+				<div
+					class="collapse navbar-collapse" 
+					id="navbar-menu"	
+					>
+					<ul class="nav navbar-nav" 
+							>
+						<li class="nav-item-mi-cuenta dropdown menu-item" id="my-account">
+							<a class="dropdown-toggle" href="#" @click.prevent="dropdown = !dropdown">
+								<span>Mi cuenta</span>
+								<i class="micon-expand_more"></i>
+							</a>
+							<div class="clickoutside" v-if="dropdown" @click="hideDropdown"></div>
+							<ul v-show="dropdown" class="submenu-0 dropdown-menu">
+								<li class="submenu-item submenu-item-cambiar-clave" id="change-password">
+									<a href="https://web.sbseguros.co/auth/realms/escritorio-virtual/account/password?referrer=modyo&referrer_uri={{ site.account_url }}/escritorio-virtual&host=web.sbseguros.co&subhost={{ site.account_url }}">
+										<span>Cambiar contraseña</span> 
+									</a>
+								</li>
+								<li class="submenu-item submenu-item-cerrar-sesion" id="sing-out">
+									<a  href="{{ site.account_url }}/logout?site=9170d622-0bf9-45b7-b1a1-c62a6ef40c4d">
+										<span>Cerrar sesión</span> 
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</nav>
+	</div>
+</header>
+
